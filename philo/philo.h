@@ -61,7 +61,7 @@ void	*routine(void *arg);
 
 /* monitor */
 void	monitor(t_philo *philo_tab);
-
+int has_death_occured(t_philo *philo);
 
 /* parsing */
 int		valid_args(int argc,char **argv);

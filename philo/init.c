@@ -6,7 +6,7 @@
 /*   By: nschilli <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 15:55:41 by nschilli          #+#    #+#             */
-/*   Updated: 2026/09/30 17:08:50 by nschilli         ###   ########.fr       */
+/*   Updated: 2026/10/01 16:26:30 by nschilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void philo_init(t_philo *philo_tab, t_data *data, pthread_mutex_t *forks, int nu
 		i++;
 	}
 }
+
+void	init_forks();
 
 void	philo_launch(t_philo *philo_tab, int num_philo)
 {
