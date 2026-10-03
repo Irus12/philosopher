@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nschilli <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/03 14:15:17 by nschilli          #+#    #+#             */
+/*   Updated: 2026/10/03 14:18:57 by nschilli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <stdlib.h>
-#include <limits.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <stdlib.h>
+# include <limits.h>
 
 /*
 	the whole data needed to represent the table
@@ -25,7 +37,7 @@ typedef struct s_data
 	pthread_mutex_t	death_lock; //protège philo_died
 	pthread_mutex_t	*forks_tab;
 	pthread_mutex_t	print_lock; //sortie global, tout les threads qui affichent
-} t_data;
+}	t_data;
 
 /*
 	each philo has their own attributes so each one
@@ -41,30 +53,31 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_lock; //protège meal_count et last_meal
 	t_data			*data;
-} t_philo;
+}	t_philo;
 
 void	*routine(void *arg);
 
+/* time */
 long	get_time(void);
+int		ft_usleep(size_t milliseconds);
 
 /* init */
-void philo_init(t_philo *philo_tab, t_data *data,
-	pthread_mutex_t *forks, int num_philo);
+void	philo_init(t_philo *philo_tab, t_data *data,
+			pthread_mutex_t *forks, int num_philo);
 void	philo_launch(t_philo *philo_tab, int num_philo);
 void	philo_join(t_philo *philo_tab, int num_philo);
 
 /*	action */
-void	eating(t_philo *philo);
-void	thinking(t_philo *philo);
-void	sleeping(t_philo *philo);
 void	*routine(void *arg);
 
 /* monitor */
 void	monitor(t_philo *philo_tab);
-int has_death_occured(t_philo *philo);
+int		has_death_occured(t_philo *philo);
+int		has_eaten_enough(t_philo *philo);
+int		reached_max_meals(t_philo *philo);
 
 /* parsing */
-int		valid_args(int argc,char **argv);
+int		valid_args(int argc, char **argv);
 t_data	*data_parsing(int argc, char **argv);
 
 /* utils*/
@@ -72,6 +85,5 @@ long	pos_long_atoi(char *str);
 int		pos_int_atoi(char *str);
 void	print_action(char *msg, t_philo *philo);
 void	*ft_calloc(int nmemb, int size);
-
 
 #endif
